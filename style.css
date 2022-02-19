@@ -1,0 +1,12 @@
+body {
+  padding: 0;
+  margin: 0;
+}
+
+canvas {
+  border: 3px solid burlywood;
+  background-color: antiquewhite;
+  margin: 0 auto;
+  display: block;
+  margin: 0 auto;
+}
