@@ -14,11 +14,11 @@
 
 class Player {
   constructor(gameInstance) {
-    this.x = 100;
-    this.y = 200;
     this.game = gameInstance;
     this.width = 50;
     this.height = 50;
+    this.x = (this.game.canvas.width - this.width) / 2; // start line
+    this.y = this.game.canvas.height - this.height; // start line
   }
 
   draw() {
