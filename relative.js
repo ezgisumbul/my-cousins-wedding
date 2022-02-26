@@ -21,6 +21,20 @@ class Relative {
     this.width = 40;
     this.height = 40;
   }
+
+  checkIntersection(player) {
+    //   if left of relative is smaller than right of player // meaning Xes, relative on right side
+    //   if rigth of relative is bigger than left of player //meaning Xes, relative on left side
+    //   if top of relative smaller than bottom of player // meaning Ys, relative at the bottom
+    //   if bottom of relative bigger than top of player // meaning Ys, relative on top
+    return (
+      this.x < this.game.player.x + this.game.player.width &&
+      this.x + this.width > this.game.player.x &&
+      this.y < this.game.player.y + this.game.player.height &&
+      this.y + this.height > this.game.player.y
+    );
+  }
+
   draw() {
     this.game.context.save();
     //this is the relative drawn below:
@@ -31,6 +45,7 @@ class Relative {
 
   moveLogic() {
     this.x -= this.speed;
+    // on every press on tryAgain button, the speed increases. Is it because I haven't put my relatives into start game method?
   }
 
   bounceTheRelatives() {

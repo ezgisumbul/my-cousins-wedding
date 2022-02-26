@@ -33,6 +33,29 @@ class Player {
     // after implementing the keyboardControls method, remove this. this is just for trial:
     //this.y -= 10;
   }
+
+  // player successfully reaches to bride and groom:
+  checkFinish() {
+    return this.y + this.height < 75;
+  }
+
+  boundPlayer() {
+    // player can't move further away from top, bottom, left and right
+    switch (true) {
+      case this.x < 0:
+        this.x = 0;
+        break;
+      case this.x + this.width > this.game.canvas.width:
+        this.x = this.game.canvas.width - this.width;
+        break;
+      case this.y < 0:
+        this.y = 0;
+        break;
+      case this.y + this.height > this.game.canvas.height:
+        this.y = this.game.canvas.height - this.height;
+        break;
+    }
+  }
 }
 
 //~player.keyboardControls();
@@ -70,5 +93,23 @@ class Player {
 //     } else if (playerY + dyPlayer + sizePlayer > canvasElement.height) {
 //       dy = -dy; // bu ise yaramadi. player positioni hep belli bi aralikta tanimlayabilirim.
 //       //ya da oraya ulasinca hep burda ciz tekrarli olarak unless iste yeniden yukari gitmeye calisirsa diyebilirim.
+//     }
+//   }
+
+// this doesn't work when checkIntersection is a method of player because relatives is an array,
+// I couldn't find a way to make it work. But it works when checkIntersection is a method of relatives
+//   checkIntersection(element) {
+//     //   if left of relative is smaller than right of player // meaning Xes, relative on right side
+//     //   if rigth of relative is bigger than left of player //meaning Xes, relative on left side
+//     //   if top of relative smaller than bottom of player // meaning Ys, relative at the bottom
+//     //   if bottom of relative bigger than top of player // meaning Ys, relative on top
+
+//     for (const relative of this.game.relatives) {
+//       return (
+//         relative.x < this.x + this.width &&
+//         relative.x + relative.width > this.x &&
+//         relative.y < this.y + this.height &&
+//         relative.y + relative.height > this.y
+//       );
 //     }
 //   }

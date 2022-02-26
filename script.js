@@ -9,32 +9,43 @@ const canvasElement = document.querySelector('canvas');
 // after putting it inside game object, I don't need it anymore
 //const context = canvasElement.getContext('2d'); // getContext (2d) gives me an object with methods and properties of 2d canvas. I assign it to a varible  so that I can use the methods of that object later (such as .fillRect()
 
-// these will be moved into classes later:
-let sizeRelative = 50;
-let sizePlayer = 50;
+const startScreen = document.getElementById('start-screen');
+const runningScreen = document.getElementById('running-screen');
+const winScreen = document.getElementById('win-screen');
+const loseScreen = document.getElementById('lose-screen');
 
-// the values inside these should be assigned to this.x and this.y in player and relative classes
-//let relativeX = canvasElement.width - sizeRelative;
-//let relativeY = canvasElement.height / 2;
-let playerX = (canvasElement.width - sizePlayer) / 2;
-let playerY = canvasElement.height - sizePlayer; //bottom of the page
-let dx = -2; // birim zamandaki yer degistirme = displacement in unit time i.e. speed
-let dy = 0;
-let dxPlayer = 0;
-let dyPlayer = -10;
+const startButton = startScreen.querySelector('button');
+const playAgainButton = loseScreen.querySelector('button');
+const tryAgainButton = loseScreen.querySelector('button');
 
-// console.log('hey');
+const screenElements = {
+  start: startScreen,
+  running: runningScreen,
+  win: winScreen,
+  lose: loseScreen
+};
 
-// hizlica cizdirmek icin yazdim. ayri bir class olacak :
-//~const relative = new Game();
-//~const player = new Game();
-
-const wGame = new Game(canvasElement); // why do we do this? because then we can access the canvas from everywhere else in the game object
+const wGame = new Game(canvasElement, screenElements); // why do we do this? because then we can access the canvas from everywhere else in the game object
 // however we could still access it as a global variable so it shouldn't be the reason. I don't really get it.
 
-//~setInterval(relative.draw, 1000 / 60);
-//window.requestAnimationFrame(player.draw); // did not work because I don't have a loop?
+startButton.addEventListener('click', () => {
+  startScreen.style.display = 'none';
+  runningScreen.style.display = 'block';
+  wGame.startGame();
+});
 
-// remove these later:
+playAgainButton.addEventListener('click', () => {
+  winScreen.style.display = 'none';
+  runningScreen.style.display = 'block';
+  wGame.startGame();
+});
 
-wGame.animationLoop();
+tryAgainButton.addEventListener('click', () => {
+  loseScreen.style.display = 'none';
+  runningScreen.style.display = 'block';
+  wGame.startGame();
+});
+
+//when user loses the game (lives =0) display lose screen
+
+//when user wins the game (reaches finish line) display win screen
