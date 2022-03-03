@@ -1,31 +1,41 @@
+const heart = new Image();
+heart.src = './images/lives/heart.png';
+
 class Game {
   constructor(canvasElement, screenElements) {
-    this.canvas = canvasElement; // don't know the reason. let's see if I access it at any point
+    this.canvas = canvasElement;
     this.context = canvasElement.getContext('2d');
     this.player = new Player(this);
     this.relatives = [];
+    this.tilemap = new Tilemap(this);
+    this.idletilemap = new IdleTilemap(this);
+    this.decoration = new Decoration(this);
     this.screen = screenElements;
-    //this.lanes = [];
+    this.gameRunning = false;
+    this.relativeSwitch = false;
 
     this.enableKeyControls(); //why do we call it when we initialise the game. can't we call it when we are drawing the game?
-    this.generateRelative();
   }
 
   startGame() {
+    this.relatives = [];
+    this.gameRunning = true;
+    this.generateRelatives();
+    console.log(this.relatives);
     this.live = 3;
     this.animationLoop();
   }
 
   loseGame() {
-    // stop the animation loop
+    this.gameRunning = false;
     this.screen.running.style.display = 'none';
-    this.screen.lose.style.display = 'block';
-    // hide the running screen
+    this.screen.lose.style.display = '';
   }
 
   winGame() {
+    this.gameRunning = false;
     this.screen.running.style.display = 'none';
-    this.screen.win.style.display = 'block';
+    this.screen.win.style.display = '';
   }
   enableKeyControls() {
     window.addEventListener('keydown', (event) => {
@@ -33,20 +43,24 @@ class Game {
       switch (key) {
         case 'ArrowUp':
           this.player.y -= 10;
+          this.player.frame++; //so that it animates only on key press
           break;
         case 'ArrowDown':
           this.player.y += 10;
+          this.player.frame++;
           break;
         case 'ArrowRight':
           this.player.x += 10;
+          this.player.frame++;
           break;
         case 'ArrowLeft':
           this.player.x -= 10;
+          this.player.frame++;
           break;
       }
     });
   }
-  //can't move this as a method of lane. If I do, I can't reference it inside generateLane
+  //can't move this as a method of relative. If I do, I can't reference it inside generateRelative
   calculateYCoordinate() {
     const yCoordinates = [];
     for (let i = 0; i < 9; i++) {
@@ -56,15 +70,31 @@ class Game {
     //console.log(yCoordinates);
   }
 
-  generateRelative() {
-    const relativeX = this.canvas.width - 50; // replace 50 with relative width
+  generateRelativeSpeed() {
+    let sign = Math.random() - 0.5;
+    if (sign < 0) {
+      const speed = -1 * Math.floor(Math.random() * (3 - 1.5 + 1) + 1.5); // the speed will vary between 0 and 1+1=2
+      return speed;
+    } else {
+      const speed = Math.floor(Math.random() * (3 - 1.5 + 1) + 1.5); // the speed will vary between 0 and 1+1=2
+      return speed;
+    }
+  }
 
+  generateRelatives() {
     const yCoordinates = this.calculateYCoordinate();
 
     yCoordinates.forEach((relativeY) => {
-      const speed = Math.random() + 1; // the speed will vary between 0 and 1+1=2
+      //const relativeX = Math.random() * (this.canvas.width - this.relatives.width); // this doesn't work (is it because I should say for each)
+      const relativeX = Math.random() * (this.canvas.width - 55); // but this works
+      //   const speed = 4 * (Math.random() - 0.5); // the speed will vary between 0 and 1+1=2
+      const speed = this.generateRelativeSpeed();
       const relative = new Relative(this, relativeX, relativeY, speed);
       this.relatives.push(relative);
+    });
+    this.relatives.forEach((rel, ind) => {
+      //console.log(`Assigning ${ind} which is ${imagesOfRelatives[ind].src}`);
+      rel.image = imagesOfRelatives[ind % imagesOfRelatives.length];
     });
   }
 
@@ -72,7 +102,9 @@ class Game {
     window.requestAnimationFrame(() => {
       this.runLogic();
       this.draw();
-      this.animationLoop();
+      if (this.gameRunning === true) {
+        this.animationLoop();
+      }
     });
   }
 
@@ -81,7 +113,7 @@ class Game {
       this.loseGame();
     }
 
-    if (this.player.y < 75 - this.player.height) {
+    if (this.player.checkFinish()) {
       this.winGame();
     }
     for (const relative of this.relatives) {
@@ -93,77 +125,34 @@ class Game {
       // send the player back to start line:
       const areIntersecting = relative.checkIntersection(this.player);
       if (areIntersecting) {
-        console.log('they areIntersecting');
         this.player.y = this.canvas.height - this.player.height;
         this.live -= 1;
       }
     }
 
-    const isFinished = this.player.checkFinish(); // for player run check Finish method to check for success
-    if (isFinished) {
-      console.log('success');
-    }
-
     this.player.boundPlayer(); // for player run bound method to keep player in the canvas
-
-    // this doesn't work when checkIntersection is a method of player because relatives is an array,
-    // I couldn't find a way to make it work. But it works when checkIntersection is a method of relatives
-    // this.player.moveLogic();
-    // for (const relative of this.relatives) {
-    //   const areIntersecting = this.player.checkIntersection(relative);
-    //   if (areIntersecting) {
-    //     console.log('they areIntersecting');
-    //   }
-    // }
   }
 
-  drawFinishandStartLine() {
-    this.context.save();
-
-    this.context.beginPath();
-    this.context.moveTo(0, 74);
-    this.context.lineTo(this.canvas.width, 74);
-    this.context.moveTo(0, this.canvas.height - 74);
-    this.context.lineTo(this.canvas.width, this.canvas.height - 74);
-    this.context.closePath();
-    this.context.strokeStyle = '#B4A7D6';
-    this.context.stroke();
-
-    this.context.restore();
-  }
-
-  drawLivesCount() {
-    this.context.save();
-    this.context.font = '40px red monospace';
-    this.context.fillStyle = 'green';
-    this.context.fillText(this.live, this.canvas.width - 40, 50);
-
-    // switch (true) {
-    //   case (this.live = 3):
-    //     this.context.fillRect(this.canvas.width - 40, 20, 20, 20);
-    //     this.context.fillRect(this.canvas.width - 80, 20, 20, 20);
-    //     this.context.fillRect(this.canvas.width - 120, 20, 20, 20);
-    //     break;
-    //   case (this.live = 2):
-    //     this.context.fillRect(this.canvas.width - 40, 20, 20, 20);
-    //     this.context.fillRect(this.canvas.width - 80, 20, 20, 20);
-    //     break;
-    //   case (this.live = 1):
-    //     this.context.fillRect(this.canvas.width - 40, 20, 20, 20);
-    //     break;
-    // }
-
-    this.context.restore();
+  drawLives() {
+    for (let i = 0; i < this.live; i++) {
+      this.context.drawImage(heart, this.canvas.width - 70 - i * 40, 3, 80, 80);
+    }
   }
 
   draw() {
     this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    this.drawFinishandStartLine();
+    // this.drawFinishandStartLine();
+    this.tilemap.draw();
+    this.idletilemap.drawUp();
+    this.idletilemap.drawDown();
+    this.decoration.draw();
     this.player.draw();
+
     for (const relative of this.relatives) {
       relative.draw();
     }
-    this.drawLivesCount();
+    //this.drawLivesCount();
+    this.drawLives();
   }
 }
 
@@ -178,4 +167,27 @@ class Game {
 //       const lane = new Lane(this, laneX, laneY);
 //       this.lanes.push(lane);
 //     });
+//   }
+
+//   drawLivesCount() {
+//     this.context.save();
+//     this.context.font = '40px monospace';
+//     this.context.fillStyle = 'green';
+//     this.context.fillText(this.live, this.canvas.width - 40, 50);
+//     this.context.restore();
+//   }
+
+//   drawFinishandStartLine() {
+//     this.context.save();
+
+//     this.context.beginPath();
+//     this.context.moveTo(0, 74);
+//     this.context.lineTo(this.canvas.width, 74);
+//     this.context.moveTo(0, this.canvas.height - 74);
+//     this.context.lineTo(this.canvas.width, this.canvas.height - 74);
+//     this.context.closePath();
+//     this.context.strokeStyle = '#B4A7D6';
+//     this.context.stroke();
+
+//     this.context.restore();
 //   }

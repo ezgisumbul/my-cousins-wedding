@@ -1,37 +1,37 @@
-// // these will be moved into classes later:
-// let sizeRelative = 50;
-// let sizePlayer = 50;
-
-// // the values inside these should be assigned to this.x and this.y in player and relative classes
-// let relativeX = canvasElement.width - sizeRelative;
-// let relativeY = canvasElement.height / 2;
-// let playerX = (canvasElement.width - sizePlayer) / 2;
-// let playerY = canvasElement.height - sizePlayer; //bottom of the page
-// let dx = -2; // birim zamandaki yer degistirme = displacement in unit time i.e. speed
-// let dy = 0;
-// let dxPlayer = 0;
-// let dyPlayer = -10;
+const playerImage = new Image();
+playerImage.src = './images/player/Mavia.png';
 
 class Player {
   constructor(gameInstance) {
     this.game = gameInstance;
-    this.width = 50;
-    this.height = 50;
+    this.width = 55;
+    this.height = 55;
     this.x = (this.game.canvas.width - this.width) / 2; // start line
     this.y = this.game.canvas.height - this.height; // start line
+    this.frame = 1;
+    this.framesDrawn = 0;
   }
 
   draw() {
-    this.game.context.save();
-    this.game.context.fillStyle = 'lightgreen';
-    this.game.context.fillRect(this.x, this.y, this.width, this.height);
-    //     //playerY += dyPlayer; // bu gercekten de minik minik ilerletiyo playeri
-    this.game.context.restore();
-  }
+    this.framesDrawn++;
+    if (this.framesDrawn >= 10) {
+      //this.frame++;
+      this.framesDrawn = 0;
+    }
 
-  moveLogic() {
-    // after implementing the keyboardControls method, remove this. this is just for trial:
-    //this.y -= 10;
+    this.game.context.save();
+    this.game.context.drawImage(
+      playerImage,
+      21 + 30 * (this.frame % 3), //51 // 82
+      16, //17
+      17,
+      25,
+      this.x,
+      this.y,
+      this.width,
+      this.height
+    );
+    this.game.context.restore();
   }
 
   // player successfully reaches to bride and groom:
@@ -58,51 +58,9 @@ class Player {
   }
 }
 
-//~player.keyboardControls();
-//player.playerPassTopBoundry();
-
-//   keyboardControls() {
-//     // bir sebeple dy exponantial degisiyo gibi oluyo. birer birer degismiyo player position
-//     window.addEventListener('keydown', (event) => {
-//       switch (event.key) {
-//         case 'ArrowUp':
-//           playerY += dyPlayer;
-
-//           if (playerY < 0) {
-//             playerY = 0;
-//           }
-//           break;
-//         case 'ArrowDown':
-//           playerY -= dyPlayer;
-//           if (playerY + sizePlayer > canvasElement.height) {
-//             playerY = canvasElement.height - sizePlayer;
-//           }
-//           break;
-//       }
-//     });
-//   }
-
-// player successfully reaches to bride and groom:
-//   playerPassTopBoundry() {
-//     if (
-//       playerY + dyPlayer + sizePlayer / 2 <
-//       0 // vucudunun yarisi gecince kabul ediyorum basarili olarak
-//     ) {
-//       console.log('success'); // bu arada burada normalde oyunu bitirmem lazim cunku setInterval yuzunden surekli success logluyor.
-//       //dyPlayer = -dyPlayer;
-//     } else if (playerY + dyPlayer + sizePlayer > canvasElement.height) {
-//       dy = -dy; // bu ise yaramadi. player positioni hep belli bi aralikta tanimlayabilirim.
-//       //ya da oraya ulasinca hep burda ciz tekrarli olarak unless iste yeniden yukari gitmeye calisirsa diyebilirim.
-//     }
-//   }
-
 // this doesn't work when checkIntersection is a method of player because relatives is an array,
 // I couldn't find a way to make it work. But it works when checkIntersection is a method of relatives
 //   checkIntersection(element) {
-//     //   if left of relative is smaller than right of player // meaning Xes, relative on right side
-//     //   if rigth of relative is bigger than left of player //meaning Xes, relative on left side
-//     //   if top of relative smaller than bottom of player // meaning Ys, relative at the bottom
-//     //   if bottom of relative bigger than top of player // meaning Ys, relative on top
 
 //     for (const relative of this.game.relatives) {
 //       return (
@@ -113,3 +71,10 @@ class Player {
 //       );
 //     }
 //   }
+// this.player.moveLogic();
+// for (const relative of this.relatives) {
+//   const areIntersecting = this.player.checkIntersection(relative);
+//   if (areIntersecting) {
+//     console.log('they areIntersecting');
+//   }
+// }

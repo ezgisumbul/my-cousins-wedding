@@ -30,22 +30,22 @@ const wGame = new Game(canvasElement, screenElements); // why do we do this? bec
 
 startButton.addEventListener('click', () => {
   startScreen.style.display = 'none';
-  runningScreen.style.display = 'block';
+  runningScreen.style.display = '';
   wGame.startGame();
 });
 
 playAgainButton.addEventListener('click', () => {
   winScreen.style.display = 'none';
-  runningScreen.style.display = 'block';
+  runningScreen.style.display = '';
   wGame.startGame();
+  //window.reload(); delete startGame and reload whole window
 });
 
 tryAgainButton.addEventListener('click', () => {
   loseScreen.style.display = 'none';
-  runningScreen.style.display = 'block';
-  wGame.startGame();
+  runningScreen.style.display = '';
+  if (!wGame.running) {
+    wGame.startGame();
+    //window.reload(); delete startGame and reload whole window
+  }
 });
-
-//when user loses the game (lives =0) display lose screen
-
-//when user wins the game (reaches finish line) display win screen
