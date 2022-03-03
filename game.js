@@ -12,14 +12,15 @@ class Game {
     this.decoration = new Decoration(this);
     this.screen = screenElements;
     this.gameRunning = false;
-    this.relativeSwitch = false;
 
     this.enableKeyControls(); //why do we call it when we initialise the game. can't we call it when we are drawing the game?
   }
 
   startGame() {
-    this.relatives = [];
     this.gameRunning = true;
+    this.relatives = [];
+    this.player.x = (this.canvas.width - this.player.width) / 2; // start line
+    this.player.y = this.canvas.height - this.player.height; // start line
     this.generateRelatives();
     console.log(this.relatives);
     this.live = 3;
@@ -38,23 +39,24 @@ class Game {
     this.screen.win.style.display = '';
   }
   enableKeyControls() {
+      
     window.addEventListener('keydown', (event) => {
       const key = event.key;
       switch (key) {
         case 'ArrowUp':
-          this.player.y -= 10;
+          this.player.y -= 20;
           this.player.frame++; //so that it animates only on key press
           break;
         case 'ArrowDown':
-          this.player.y += 10;
+          this.player.y += 20;
           this.player.frame++;
           break;
         case 'ArrowRight':
-          this.player.x += 10;
+          this.player.x += 20;
           this.player.frame++;
           break;
         case 'ArrowLeft':
-          this.player.x -= 10;
+          this.player.x -= 20;
           this.player.frame++;
           break;
       }
@@ -147,7 +149,6 @@ class Game {
     this.idletilemap.drawDown();
     this.decoration.draw();
     this.player.draw();
-
     for (const relative of this.relatives) {
       relative.draw();
     }
