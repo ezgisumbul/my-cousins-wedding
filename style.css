@@ -4,28 +4,56 @@ body {
   font-family: monospace;
 }
 
-canvas {
-  border: 3px solid antiquewhite;
-  background-color: antiquewhite;
-  margin: 0 auto;
-  display: block;
-  margin: 0 auto;
-  font-family: monospace;
-}
-
 .screen {
-  background-color: antiquewhite;
+  background-image: url('./images/My\ project\ \(11\).png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100vw;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  height: 100%;
+}
+
+canvas {
+  border: 3px solid antiquewhite;
+  background-color: antiquewhite;
+  margin: 0 auto;
+  margin-top: 2em;
+  display: block;
+  font-family: monospace;
+}
+
+#start-screen {
+  background-image: url('./images/Instructions.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+#win-screen {
+  background-image: url('./images/Win_screen.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+#lose-screen {
+  background-image: url('./images/Game_Over.png');
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 button {
-  background-color: rgb(250, 164, 66);
-  font: inherit;
+  background-color: #E9B047;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-style: italic;
+  font-weight: bold;
+  font-size: 2em;
+  color: aliceblue;
+  width: 8em;
   border: 0;
+  border-radius: 0.5em;
+  margin-top: 50vh;
+  margin-left: 60vw;
   padding: 1em;
 }

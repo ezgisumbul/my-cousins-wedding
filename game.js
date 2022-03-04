@@ -44,19 +44,19 @@ class Game {
       const key = event.key;
       switch (key) {
         case 'ArrowUp':
-          this.player.y -= 20;
+          this.player.y -= 10;
           this.player.frame++; //so that it animates only on key press
           break;
         case 'ArrowDown':
-          this.player.y += 20;
+          this.player.y += 10;
           this.player.frame++;
           break;
         case 'ArrowRight':
-          this.player.x += 20;
+          this.player.x += 10;
           this.player.frame++;
           break;
         case 'ArrowLeft':
-          this.player.x -= 20;
+          this.player.x -= 10;
           this.player.frame++;
           break;
       }
@@ -137,7 +137,7 @@ class Game {
 
   drawLives() {
     for (let i = 0; i < this.live; i++) {
-      this.context.drawImage(heart, this.canvas.width - 70 - i * 40, 3, 80, 80);
+      this.context.drawImage(heart, this.canvas.width - 120 - i * 60, 0, 100, 100);
     }
   }
 

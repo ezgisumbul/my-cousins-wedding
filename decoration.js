@@ -4,6 +4,9 @@ wallImage.src = './images/environment/TX Tileset Wall.png';
 const treeImage = new Image();
 treeImage.src = './images/environment/chestnut-001.png';
 
+const leavesImage = new Image();
+leavesImage.src = './images/environment/Main.png'
+
 const plant1Image = new Image();
 plant1Image.src = './images/environment/plants/anthurium-pink.png';
 
@@ -64,6 +67,7 @@ class Decoration {
     this.bride = brideImage;
     this.groom = groomImage;
     this.bench = benchImage;
+    this.leaves = leavesImage;
     this.arc = arcImage;
     this.treeX = 0;
     this.treeY = 0;
@@ -93,6 +97,10 @@ class Decoration {
     this.benchY = 0;
     this.benchWidth = 100;
     this.benchHeight = 50;
+    this.leavesX = 199;
+    this.leavesY = 111;
+    this.leavesWidth = 22;
+    this.leavesHeight = 22;
 
     // tree : 1
     // wall : 3
@@ -101,15 +109,18 @@ class Decoration {
     // groom : 5
 
     this.tiles = [
-      1, 0, 1, 0, 1, 0, 1, 0, 4, 5, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0,
-      1, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-      0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1
+      1, 1, 1, 1, 1, 1, 1, 1, 4, 5, 1, 1, 1, 1, 1, 1, 0, 0, 
+      1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 
+      1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 
+      1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 
+      1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 
+      1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 
+      1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 
+      1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 
+      1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 
+      1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 
+      1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 
+      1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1
     ];
   }
 
@@ -177,6 +188,14 @@ class Decoration {
               imageWidth = this.benchWidth;
               imageHeight = this.benchHeight;
               break;
+
+              case 7:
+                image = this.leaves;
+                imageX = this.leavesX;
+                imageY = this.leavesY;
+                imageWidth = this.leavesWidth;
+                imageHeight = this.leavesHeight;
+                break;
             // default:
             //   image = this.grass;
             //   imageX = this.grassX;
