@@ -1,6 +1,14 @@
 const heart = new Image();
 heart.src = './images/lives/heart.png';
 
+const relativeHitSound = new Audio('./audio/Hit4.wav');
+
+const winSound = new Audio('./audio/round_end.wav');
+
+const loseSound = new Audio('./audio/total fail.wav');
+
+const backgroundMusic = new Audio('./audio/jazzcrash.wav');
+
 class Game {
   constructor(canvasElement, screenElements) {
     this.canvas = canvasElement;
@@ -29,17 +37,20 @@ class Game {
 
   loseGame() {
     this.gameRunning = false;
+    backgroundMusic.pause();
     this.screen.running.style.display = 'none';
     this.screen.lose.style.display = '';
+    loseSound.play();
   }
 
   winGame() {
     this.gameRunning = false;
+    backgroundMusic.pause();
     this.screen.running.style.display = 'none';
     this.screen.win.style.display = '';
+    winSound.play();
   }
   enableKeyControls() {
-      
     window.addEventListener('keydown', (event) => {
       const key = event.key;
       switch (key) {
@@ -108,6 +119,7 @@ class Game {
         this.animationLoop();
       }
     });
+    backgroundMusic.play();
   }
 
   runLogic() {
@@ -128,6 +140,7 @@ class Game {
       const areIntersecting = relative.checkIntersection(this.player);
       if (areIntersecting) {
         this.player.y = this.canvas.height - this.player.height;
+        relativeHitSound.play();
         this.live -= 1;
       }
     }
@@ -137,7 +150,13 @@ class Game {
 
   drawLives() {
     for (let i = 0; i < this.live; i++) {
-      this.context.drawImage(heart, this.canvas.width - 120 - i * 60, 0, 100, 100);
+      this.context.drawImage(
+        heart,
+        this.canvas.width - 120 - i * 60,
+        0,
+        100,
+        100
+      );
     }
   }
 
