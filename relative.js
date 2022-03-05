@@ -43,8 +43,8 @@ class Relative {
     this.y = y;
     this.speed = speed;
     this.game = gameInstance;
-    this.width = 55;
-    this.height = 55;
+    this.width = 48;
+    this.height = 48;
     this.image = image;
     this.cropY = cropY;
   }
@@ -55,10 +55,10 @@ class Relative {
     //   if top of relative smaller than bottom of player // meaning Ys, relative at the bottom
     //   if bottom of relative bigger than top of player // meaning Ys, relative on top
     return (
-      this.x < this.game.player.x + this.game.player.width &&
-      this.x + this.width > this.game.player.x &&
-      this.y < this.game.player.y + this.game.player.height &&
-      this.y + this.height > this.game.player.y
+      this.x < this.game.player.x + this.game.player.width - 7 && //relative coming from right
+      this.x + this.width > this.game.player.x  + 7 && // relative coming from left
+      this.y < this.game.player.y + this.game.player.height  - 2 && // relative coming from bottom
+      this.y + this.height  > this.game.player.y + 2 // relative comming from top
     );
   }
 

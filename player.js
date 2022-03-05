@@ -4,8 +4,8 @@ playerImage.src = './images/player/Mavia.png';
 class Player {
   constructor(gameInstance) {
     this.game = gameInstance;
-    this.width = 55;
-    this.height = 55;
+    this.width = 48;
+    this.height = 48;
     this.x = (this.game.canvas.width - this.width) / 2; // start line
     this.y = this.game.canvas.height - this.height; // start line
     this.frame = 1;
@@ -19,7 +19,7 @@ class Player {
       this.framesDrawn = 0;
     }
 
-    this.game.context.save();
+
     this.game.context.drawImage(
       playerImage,
       21 + 30 * (this.frame % 3), //51 // 82
@@ -31,7 +31,7 @@ class Player {
       this.width,
       this.height
     );
-    this.game.context.restore();
+ 
   }
 
   // player successfully reaches to bride and groom:

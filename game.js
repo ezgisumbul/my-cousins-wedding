@@ -9,6 +9,8 @@ const loseSound = new Audio('./audio/total fail.wav');
 
 const backgroundMusic = new Audio('./audio/jazzcrash.wav');
 
+const coinCollectSound = new Audio('./audio/Coin3.wav');
+
 class Game {
   constructor(canvasElement, screenElements) {
     this.canvas = canvasElement;
@@ -18,14 +20,26 @@ class Game {
     this.tilemap = new Tilemap(this);
     this.idletilemap = new IdleTilemap(this);
     this.decoration = new Decoration(this);
+    this.coin = new Coin(this);
     this.screen = screenElements;
     this.gameRunning = false;
+    this.isCollected = false;
+    this.coinSound = false;
 
     this.enableKeyControls(); //why do we call it when we initialise the game. can't we call it when we are drawing the game?
   }
 
+
+  coinSoundPlayOnce() {
+    if (!this.coinSound) {
+      this.coinSound = true;
+      coinCollectSound.play();
+    }
+  }
+
   startGame() {
     this.gameRunning = true;
+    this.coin.setRandomPosition();
     this.relatives = [];
     this.player.x = (this.canvas.width - this.player.width) / 2; // start line
     this.player.y = this.canvas.height - this.player.height; // start line
@@ -50,6 +64,8 @@ class Game {
     this.screen.win.style.display = '';
     winSound.play();
   }
+
+  
   enableKeyControls() {
     window.addEventListener('keydown', (event) => {
       const key = event.key;
@@ -127,8 +143,10 @@ class Game {
       this.loseGame();
     }
 
-    if (this.player.checkFinish()) {
-      this.winGame();
+    if (this.isCollected) {
+      if (this.player.checkFinish()) {
+        this.winGame();
+      }
     }
     for (const relative of this.relatives) {
       // for every relative run move, bounce and intersection methods
@@ -139,11 +157,20 @@ class Game {
       // send the player back to start line:
       const areIntersecting = relative.checkIntersection(this.player);
       if (areIntersecting) {
-        this.player.y = this.canvas.height - this.player.height;
+        this.player.y = this.canvas.height - this.player.height; //start line
+        this.player.x = (this.canvas.width - this.player.width) / 2; // start line
         relativeHitSound.play();
         this.live -= 1;
       }
     }
+
+    const coinIntersection = this.coin.checkIntersection(this.player);
+    if (coinIntersection) {
+      this.isCollected = true;
+      this.coinSoundPlayOnce();
+    }
+
+
 
     this.player.boundPlayer(); // for player run bound method to keep player in the canvas
   }
@@ -167,6 +194,9 @@ class Game {
     this.idletilemap.drawUp();
     this.idletilemap.drawDown();
     this.decoration.draw();
+    if (!this.isCollected) {
+      this.coin.draw();
+    }
     this.player.draw();
     for (const relative of this.relatives) {
       relative.draw();
