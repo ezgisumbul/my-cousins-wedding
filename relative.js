@@ -50,15 +50,11 @@ class Relative {
   }
 
   checkIntersection() {
-    //   if left of relative is smaller than right of player // meaning Xes, relative on right side
-    //   if rigth of relative is bigger than left of player //meaning Xes, relative on left side
-    //   if top of relative smaller than bottom of player // meaning Ys, relative at the bottom
-    //   if bottom of relative bigger than top of player // meaning Ys, relative on top
     return (
       this.x < this.game.player.x + this.game.player.width - 7 && //relative coming from right
-      this.x + this.width > this.game.player.x  + 7 && // relative coming from left
-      this.y < this.game.player.y + this.game.player.height  - 2 && // relative coming from bottom
-      this.y + this.height  > this.game.player.y + 2 // relative comming from top
+      this.x + this.width > this.game.player.x + 7 && // relative coming from left
+      this.y < this.game.player.y + this.game.player.height - 4 && // relative coming from bottom
+      this.y + this.height > this.game.player.y + 4 // relative comming from top
     );
   }
 
@@ -88,15 +84,12 @@ class Relative {
 
   moveLogic() {
     this.x -= this.speed;
-
-    // on every press on tryAgain button, the speed increases. Is it because I haven't put my relatives into start game method?
   }
 
   bounceTheRelatives() {
     if (
-      this.x - this.speed < 0 || // if I change it from 0 to another number
-      this.x - this.speed > this.game.canvas.width - this.width // or subtract another number from this side
-      // the character animations or positions have an issue and characters got stuck on left side of the boundary
+      this.x - this.speed < 0 ||
+      this.x - this.speed > this.game.canvas.width - this.width
     ) {
       this.speed = -this.speed;
     }

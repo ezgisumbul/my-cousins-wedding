@@ -1,7 +1,5 @@
-
 const grassImage = new Image();
 grassImage.src = './images/environment/grass.png';
-
 
 class Tilemap {
   constructor(gameInstance) {
@@ -11,25 +9,22 @@ class Tilemap {
     this.tilesize = 50;
 
     this.grass = grassImage;
-    
+
     this.grassX = 0;
     this.grassY = 0;
     this.grassWidth = 32;
     this.grassHeight = 32;
-    
+
     // grass : 1
 
-
     this.tiles = [
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
+      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
     ];
   }
 
@@ -58,7 +53,7 @@ class Tilemap {
           }
           // 0 => empty tile
           this.game.context.drawImage(
-            image, // image
+            image,
             imageX,
             imageY,
             imageWidth,
@@ -73,61 +68,3 @@ class Tilemap {
     }
   }
 }
-
-// this.game.context.scale(-1,1 will rotate the image 180' around y axis if it is added before the draw is called for the respective image)
-
-// OBSOLETE
-
-//this.tilesize = 50;
-// this.concrete = //imageUpload;
-// this.grass = //imageUpload;
-// this.tree = //imageUpload;
-// this.altar = //imageUpload;
-// this.mapMiddle = [
-//   [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-//   [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1],
-//   [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-//   [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-//   [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-//   [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-//   [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-//   [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-//   [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-// ];
-
-//   drawMap() {
-//     for (let row = 0; row < this.mapMiddle.length; row++) {
-//       for (let col = 0; col < this.mapMiddle[row].length; col++) {
-//         // const tile = this.mapMiddle[row][col];
-//         // let image = null;
-//         // switch (tile) {
-//         //   case 1:
-//         //     image = concreteImage;
-//         //     break;
-//         // }
-
-//         // if (image != null) {}
-//         // if (tile === 1) {
-//         //  concreteImage.onload = () => {
-
-//         this.game.context.drawImage(
-//           concreteImage,
-//           0,
-//           193,
-//           193,
-//           193,
-//           this.mapMiddle[col] * 50,
-//           75 + this.mapMiddle[row] * 50,
-//           50,
-//           50
-//         );
-
-//         // };
-//         // }
-//       }
-//     }
-//   }
-
-//   draw() {
-//     this.game.context.drawImage(concreteImage, 0, 193, 193, 193, 0, 75, 50, 50);
-//   }

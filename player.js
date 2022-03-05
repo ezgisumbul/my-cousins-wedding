@@ -4,8 +4,8 @@ playerImage.src = './images/player/Mavia.png';
 class Player {
   constructor(gameInstance) {
     this.game = gameInstance;
-    this.width = 48;
-    this.height = 48;
+    this.width = 46;
+    this.height = 46;
     this.x = (this.game.canvas.width - this.width) / 2; // start line
     this.y = this.game.canvas.height - this.height; // start line
     this.frame = 1;
@@ -57,24 +57,3 @@ class Player {
     }
   }
 }
-
-// this doesn't work when checkIntersection is a method of player because relatives is an array,
-// I couldn't find a way to make it work. But it works when checkIntersection is a method of relatives
-//   checkIntersection(element) {
-
-//     for (const relative of this.game.relatives) {
-//       return (
-//         relative.x < this.x + this.width &&
-//         relative.x + relative.width > this.x &&
-//         relative.y < this.y + this.height &&
-//         relative.y + relative.height > this.y
-//       );
-//     }
-//   }
-// this.player.moveLogic();
-// for (const relative of this.relatives) {
-//   const areIntersecting = this.player.checkIntersection(relative);
-//   if (areIntersecting) {
-//     console.log('they areIntersecting');
-//   }
-// }

@@ -1,8 +1,6 @@
 const stoneImage = new Image();
 stoneImage.src = './images/environment/Main.png';
 
-
-
 class IdleTilemap {
   constructor(gameInstance) {
     this.game = gameInstance;
@@ -15,8 +13,7 @@ class IdleTilemap {
     this.concreteWidth = 12;
     this.concreteHeight = 12;
 
-
-    // concrete : 3
+    // concrete : 1
 
     this.tiles = [
       1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
@@ -37,7 +34,6 @@ class IdleTilemap {
         let tile = this.getTile(i, j);
 
         if (tile !== 0) {
-          // down drawing'e bunu koymadim ki cizsin her turlu. ust tarafta o bosluga canlar gelicek
           this.game.context.drawImage(
             stoneImage, // image
             this.concreteX,

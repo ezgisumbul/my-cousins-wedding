@@ -13,8 +13,12 @@ class Coin {
   }
 
   setRandomPosition() {
-    this.x = Math.floor(Math.random() * (this.game.canvas.width -100 - 100  + 1) + 100);
-    this.y = Math.floor(Math.random() * (this.game.canvas.height -150 - 150  + 1) + 100);
+    this.x = Math.floor(
+      Math.random() * (this.game.canvas.width - 100 - 100 + 1) + 100
+    );
+    this.y = Math.floor(
+      Math.random() * (this.game.canvas.height - 150 - 150 + 1) + 100
+    );
   }
 
   draw() {
@@ -39,10 +43,10 @@ class Coin {
 
   checkIntersection() {
     return (
-      this.x < this.game.player.x + this.game.player.width - 10 && //relative coming from right
-      this.x + this.width > this.game.player.x + 10 && // relative coming from left
-      this.y < this.game.player.y + this.game.player.height - 10 && // relative coming from bottom
-      this.y + this.height > this.game.player.y + +10 // relative comming from top
+      this.x < this.game.player.x + this.game.player.width - 10 && //coin on right side
+      this.x + this.width > this.game.player.x + 10 && // coin on left side
+      this.y < this.game.player.y + this.game.player.height - 10 && // coin down
+      this.y + this.height > this.game.player.y + +10 // coin up
     );
   }
 }

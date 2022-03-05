@@ -14,13 +14,8 @@ const coinCollectSound = new Audio('./audio/coin.wav');
 class Game {
   constructor(canvasElement, screenElements) {
     this.canvas = canvasElement;
-    // this.canvastop = canvasTop;
-    // this.canvasLeft = canvasLeft;
-    // this.canvasRight = canvasRight;
     this.context = canvasElement.getContext('2d');
-    // this.contextTop = canvasTop.getContext('2d');
-    // this.contextLeft =canvasLeft.getContext('2d');
-    // this.contextRight =canvasRight.getContext('2d');
+
     this.player = new Player(this);
     this.relatives = [];
     this.tilemap = new Tilemap(this);
@@ -28,8 +23,10 @@ class Game {
     this.decoration = new Decoration(this);
     this.topdecoration = new TopDecoration(this);
     this.coin = new Coin(this);
+
     this.screen = screenElements;
     this.gameRunning = false;
+
     this.isCollected = false;
     this.coinSound = false;
 
@@ -52,7 +49,6 @@ class Game {
     this.player.x = (this.canvas.width - this.player.width) / 2; // start line
     this.player.y = this.canvas.height - this.player.height; // start line
     this.generateRelatives();
-    console.log(this.relatives);
     this.live = 3;
     this.animationLoop();
   }
@@ -96,14 +92,13 @@ class Game {
       }
     });
   }
-  //can't move this as a method of relative. If I do, I can't reference it inside generateRelative
+
   calculateYCoordinate() {
     const yCoordinates = [];
     for (let i = 0; i < 9; i++) {
       yCoordinates.push(75 + i * 50); //75 is the initial start point. 9 is the number of rows. 50 is the height of rows
     }
     return yCoordinates;
-    //console.log(yCoordinates);
   }
 
   generateRelativeSpeed() {
@@ -212,39 +207,3 @@ class Game {
     this.drawLives();
   }
 }
-
-//OBSOLETE
-
-//   generateLane() {
-//     //const laneY = this.calculateYCoordinate();
-//     const laneX = this.canvas.width - 50;
-//     const yCoordinates = this.calculateYCoordinate();
-//     //console.log(yCoordinates);
-//     yCoordinates.forEach((laneY) => {
-//       const lane = new Lane(this, laneX, laneY);
-//       this.lanes.push(lane);
-//     });
-//   }
-
-//   drawLivesCount() {
-//     this.context.save();
-//     this.context.font = '40px monospace';
-//     this.context.fillStyle = 'green';
-//     this.context.fillText(this.live, this.canvas.width - 40, 50);
-//     this.context.restore();
-//   }
-
-//   drawFinishandStartLine() {
-//     this.context.save();
-
-//     this.context.beginPath();
-//     this.context.moveTo(0, 74);
-//     this.context.lineTo(this.canvas.width, 74);
-//     this.context.moveTo(0, this.canvas.height - 74);
-//     this.context.lineTo(this.canvas.width, this.canvas.height - 74);
-//     this.context.closePath();
-//     this.context.strokeStyle = '#B4A7D6';
-//     this.context.stroke();
-
-//     this.context.restore();
-//   }

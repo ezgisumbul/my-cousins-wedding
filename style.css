@@ -31,37 +31,24 @@ body {
 }
 
 #top-canvas {
-  /* border: 3px solid antiquewhite; */
   background-color: antiquewhite;
-
-  /* margin-top: 100px; */
   display: block;
 }
 
 #game-canvas {
-  /* border: 3px solid antiquewhite; */
   background-color: antiquewhite;
-  /* margin: 0 auto;
-  margin-top: 0; */
   display: block;
   font-family: monospace;
 }
 
 #left-canvas {
-  /* border: 3px solid antiquewhite; */
   background-color: antiquewhite;
-
-  /* margin-left: 20px; */
   display: block;
 }
 #right-canvas {
-  /* border: 3px solid antiquewhite; */
   background-color: antiquewhite;
-
-  /* margin-left: 20px; */
   display: block;
 }
-
 
 #start-screen {
   background-image: url('./images/backgrounds/intructions.png');
@@ -93,7 +80,6 @@ button {
   border-radius: 0.5em;
   margin: 0 auto;
   margin-top: 40vh;
-  /* margin-left: 60vw; */
   padding: 1em;
 }
 
