@@ -14,7 +14,7 @@ class Coin {
 
   setRandomPosition() {
     this.x = Math.floor(Math.random() * (this.game.canvas.width -100 - 100  + 1) + 100);
-    this.y = Math.floor(Math.random() * (this.game.canvas.height -100 - 100  + 1) + 100);
+    this.y = Math.floor(Math.random() * (this.game.canvas.height -150 - 150  + 1) + 100);
   }
 
   draw() {
@@ -26,8 +26,8 @@ class Coin {
 
     this.game.context.drawImage(
       coinImage,
-      0 + 32 * (this.frame % 6), //51 // 82
-      0, //17
+      0 + 32 * (this.frame % 6),
+      0,
       32,
       32,
       this.x,

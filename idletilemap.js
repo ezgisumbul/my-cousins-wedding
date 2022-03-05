@@ -1,8 +1,7 @@
 const stoneImage = new Image();
 stoneImage.src = './images/environment/Main.png';
 
-const waterImage = new Image();
-waterImage.src = './images/environment/Grass&Water_Light.png';
+
 
 class IdleTilemap {
   constructor(gameInstance) {
@@ -12,14 +11,10 @@ class IdleTilemap {
     this.tilesize = 25;
     this.concrete = stoneImage;
     this.concreteX = 60;
-    this.concreteY = 146;
-    this.concreteWidth = 25;
-    this.concreteHeight = 25;
-    this.water = waterImage;
-    this.waterX = 150;
-    this.waterY = 25;
-    this.waterWidth = 25;
-    this.waterHeight = 25;
+    this.concreteY = 108;
+    this.concreteWidth = 12;
+    this.concreteHeight = 12;
+
 
     // concrete : 3
 

@@ -1,6 +1,7 @@
 //for some reason this should be globally available and
 //not be inside Game class. Let's leave it like this and see
-const canvasElement = document.querySelector('canvas');
+const canvasElement = document.getElementById('game-canvas');
+
 
 //and for some reason this can be inside Game class
 //and not necessarily be globally available. Isn't other classes

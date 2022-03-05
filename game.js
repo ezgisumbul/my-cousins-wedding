@@ -14,21 +14,27 @@ const coinCollectSound = new Audio('./audio/Coin3.wav');
 class Game {
   constructor(canvasElement, screenElements) {
     this.canvas = canvasElement;
+    // this.canvastop = canvasTop;
+    // this.canvasLeft = canvasLeft;
+    // this.canvasRight = canvasRight;
     this.context = canvasElement.getContext('2d');
+    // this.contextTop = canvasTop.getContext('2d');
+    // this.contextLeft =canvasLeft.getContext('2d');
+    // this.contextRight =canvasRight.getContext('2d');
     this.player = new Player(this);
     this.relatives = [];
     this.tilemap = new Tilemap(this);
     this.idletilemap = new IdleTilemap(this);
     this.decoration = new Decoration(this);
+    this.topdecoration = new TopDecoration(this);
     this.coin = new Coin(this);
     this.screen = screenElements;
     this.gameRunning = false;
     this.isCollected = false;
     this.coinSound = false;
 
-    this.enableKeyControls(); //why do we call it when we initialise the game. can't we call it when we are drawing the game?
+    this.enableKeyControls();
   }
-
 
   coinSoundPlayOnce() {
     if (!this.coinSound) {
@@ -65,7 +71,6 @@ class Game {
     winSound.play();
   }
 
-  
   enableKeyControls() {
     window.addEventListener('keydown', (event) => {
       const key = event.key;
@@ -102,10 +107,10 @@ class Game {
   generateRelativeSpeed() {
     let sign = Math.random() - 0.5;
     if (sign < 0) {
-      const speed = -1 * Math.floor(Math.random() * (3 - 1.5 + 1) + 1.5); // the speed will vary between 0 and 1+1=2
+      const speed = -1 * Math.floor(Math.random() * (3 - 1.5 + 1) + 1.5);
       return speed;
     } else {
-      const speed = Math.floor(Math.random() * (3 - 1.5 + 1) + 1.5); // the speed will vary between 0 and 1+1=2
+      const speed = Math.floor(Math.random() * (3 - 1.5 + 1) + 1.5);
       return speed;
     }
   }
@@ -114,9 +119,7 @@ class Game {
     const yCoordinates = this.calculateYCoordinate();
 
     yCoordinates.forEach((relativeY) => {
-      //const relativeX = Math.random() * (this.canvas.width - this.relatives.width); // this doesn't work (is it because I should say for each)
-      const relativeX = Math.random() * (this.canvas.width - 55); // but this works
-      //   const speed = 4 * (Math.random() - 0.5); // the speed will vary between 0 and 1+1=2
+      const relativeX = Math.random() * (this.canvas.width - 60); // 60 is random
       const speed = this.generateRelativeSpeed();
       const relative = new Relative(this, relativeX, relativeY, speed);
       this.relatives.push(relative);
@@ -170,17 +173,15 @@ class Game {
       this.coinSoundPlayOnce();
     }
 
-
-
     this.player.boundPlayer(); // for player run bound method to keep player in the canvas
   }
 
   drawLives() {
     for (let i = 0; i < this.live; i++) {
-      this.context.drawImage(
+      contexttop.drawImage(
         heart,
-        this.canvas.width - 120 - i * 60,
-        0,
+        this.canvas.width - 80 - i * 60,
+        20,
         100,
         100
       );
@@ -189,7 +190,12 @@ class Game {
 
   draw() {
     this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    // this.drawFinishandStartLine();
+    this.topdecoration.drawGroundTop();
+    this.topdecoration.drawTreeTop();
+    this.topdecoration.drawGroundRight();
+    this.topdecoration.drawTreeRight();
+    this.topdecoration.drawGroundLeft();
+    this.topdecoration.drawTreeLeft();
     this.tilemap.draw();
     this.idletilemap.drawUp();
     this.idletilemap.drawDown();
@@ -201,7 +207,6 @@ class Game {
     for (const relative of this.relatives) {
       relative.draw();
     }
-    //this.drawLivesCount();
     this.drawLives();
   }
 }

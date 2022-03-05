@@ -22,8 +22,8 @@ class Player {
 
     this.game.context.drawImage(
       playerImage,
-      21 + 30 * (this.frame % 3), //51 // 82
-      16, //17
+      21 + 30 * (this.frame % 3),
+      16,
       17,
       25,
       this.x,

@@ -7,24 +7,28 @@
     <link href="style.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
-    <div class="screen" id="start-screen" >
-      <!-- <h1>My Cousin's Big Turkish Wedding</h1> -->
+    <div class="screen" id="start-screen">
       <button id="startButton">Start Game</button>
     </div>
     <div class="screen" id="running-screen" style="display: none">
-      <canvas id="myCanvas" width="900" height="600"></canvas>
+      <div id="canvas-set">
+        <div>
+          <canvas id="left-canvas" width="100" height="700"></canvas>
+        </div>
+        <div id="canvas-set-mid">
+          <canvas id="top-canvas" width="900" height="100"></canvas>
+          <canvas id="game-canvas" width="900" height="600"></canvas>
+        </div>
+        <div>
+          <canvas id="right-canvas" width="100" height="700"></canvas>
+        </div>
+      </div>
     </div>
     <div class="screen" id="win-screen" style="display: none">
-      <!-- <h2>
-        Congrats! You are free! Until the next wedding...
-      </h2> -->
       <button id="playAgainButton">Play Again</button>
     </div>
 
     <div class="screen" id="lose-screen" style="display: none">
-      <!-- <h2>
-        Game over! You got caught! Prepare your excuses and lies.
-      </h2> -->
       <button id="tryAgainButton">Try Again</button>
     </div>
 
@@ -33,6 +37,7 @@
     <script src="tilemap.js"></script>
     <script src="idletilemap.js"></script>
     <script src="decoration.js"></script>
+    <script src="topdecoration.js"></script>
     <script src="coin.js"></script>
     <script src="game.js"></script>
     <script src="script.js"></script>
