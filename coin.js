@@ -1,5 +1,5 @@
 const coinImage = new Image();
-coinImage.src = './images/coin_rot_anim.png';
+coinImage.src = './images/coin/coin.png';
 
 class Coin {
   constructor(gameInstance, x, y) {

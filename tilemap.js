@@ -1,11 +1,7 @@
-const concreteImage = new Image();
-concreteImage.src = './images/environment/Main.png';
+
 const grassImage = new Image();
 grassImage.src = './images/environment/grass.png';
-const stairImage = new Image();
-stairImage.src = './images/environment/Main.png';
-const arcImage = new Image();
-arcImage.src = './images/environment/TX Struct.png';
+
 
 class Tilemap {
   constructor(gameInstance) {
@@ -13,30 +9,16 @@ class Tilemap {
     this.rows = 9;
     this.cols = 18;
     this.tilesize = 50;
-    this.concrete = concreteImage;
+
     this.grass = grassImage;
-    this.stair = stairImage;
-    this.arc = arcImage;
+    
     this.grassX = 0;
     this.grassY = 0;
     this.grassWidth = 32;
     this.grassHeight = 32;
-    this.concreteX = 60;
-    this.concreteY = 108;
-    this.concreteWidth = 25;
-    this.concreteHeight = 25;
-    this.stairX = 9;
-    this.starirY = 116;
-    this.stairWidth = 32;
-    this.stairHeight = 39;
-    this.arcX = 419;
-    this.arcY = 128;
-    this.arcWidth = 66;
-    this.arcHeight = 66;
-
+    
     // grass : 1
-    // concrete : 3
-    // stair : 2
+
 
     this.tiles = [
       1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 
@@ -73,26 +55,6 @@ class Tilemap {
               imageWidth = this.grassWidth;
               imageHeight = this.grassHeight;
               break;
-            case 2:
-              image = this.stair;
-              imageX = this.stairX;
-              imageY = this.starirY;
-              imageWidth = this.stairWidth;
-              imageHeight = this.stairHeight;
-              break;
-            case 3:
-              image = this.concrete;
-              imageX = this.concreteX;
-              imageY = this.concreteY;
-              imageWidth = this.concreteWidth;
-              imageHeight = this.concreteHeight;
-              break;
-            // default:
-            //   image = this.grass;
-            //   imageX = this.grassX;
-            //   imageY = this.grassY;
-            //   imageWidth = this.grassWidth;
-            //   imageHeight = this.grassHeight;
           }
           // 0 => empty tile
           this.game.context.drawImage(

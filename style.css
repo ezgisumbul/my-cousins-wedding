@@ -5,7 +5,7 @@ body {
 }
 
 .screen {
-  background-image: url('./images/My\ project\ \(11\).png');
+  background-image: url('./images/backgrounds/game-running-background.png');
   background-repeat: no-repeat;
   background-size: cover;
   width: 100vw;
@@ -64,19 +64,19 @@ body {
 
 
 #start-screen {
-  background-image: url('./images/Instructions.png');
+  background-image: url('./images/backgrounds/intructions.png');
   background-repeat: no-repeat;
   background-size: cover;
 }
 
 #win-screen {
-  background-image: url('./images/Win_screen.png');
+  background-image: url('./images/backgrounds/game-win.png');
   background-repeat: no-repeat;
   background-size: cover;
 }
 
 #lose-screen {
-  background-image: url('./images/Game_Over.png');
+  background-image: url('./images/backgrounds/game-over.png');
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -91,7 +91,23 @@ button {
   width: 8em;
   border: 0;
   border-radius: 0.5em;
-  margin-top: 50vh;
-  margin-left: 60vw;
+  margin: 0 auto;
+  margin-top: 40vh;
+  /* margin-left: 60vw; */
+  padding: 1em;
+}
+
+#start-button {
+  background-color: #e9b047;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-style: italic;
+  font-weight: bold;
+  font-size: 2em;
+  color: aliceblue;
+  width: 8em;
+  border: 0;
+  border-radius: 0.5em;
+  margin-top: 60vh;
+  margin-left: 70vw;
   padding: 1em;
 }

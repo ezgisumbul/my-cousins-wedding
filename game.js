@@ -1,15 +1,15 @@
 const heart = new Image();
 heart.src = './images/lives/heart.png';
 
-const relativeHitSound = new Audio('./audio/Hit4.wav');
+const relativeHitSound = new Audio('./audio/hit.wav');
 
-const winSound = new Audio('./audio/round_end.wav');
+const winSound = new Audio('./audio/win.wav');
 
-const loseSound = new Audio('./audio/total fail.wav');
+const loseSound = new Audio('./audio/lose.wav');
 
 const backgroundMusic = new Audio('./audio/jazzcrash.wav');
 
-const coinCollectSound = new Audio('./audio/Coin3.wav');
+const coinCollectSound = new Audio('./audio/coin.wav');
 
 class Game {
   constructor(canvasElement, screenElements) {
@@ -45,6 +45,8 @@ class Game {
 
   startGame() {
     this.gameRunning = true;
+    this.coinSound = false;
+    this.isCollected = false;
     this.coin.setRandomPosition();
     this.relatives = [];
     this.player.x = (this.canvas.width - this.player.width) / 2; // start line
